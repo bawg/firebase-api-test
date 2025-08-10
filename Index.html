@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MA Systems - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section with Beach Background */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-link:hover {
+            background: #2c5aa0;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            padding: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: #f0f8ff;
+            color: #2c5aa0;
+            transform: translateX(5px);
+        }
+
+        /* Hero Content */
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            animation: slideInRight 1s ease-out 0.4s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(255,255,255,0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: transparent;
+                padding: 0;
+                margin-left: 1rem;
+            }
+        }
+
+        /* Floating particles effect */
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">MA Systems</a>
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Company</a>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item">About Us</a>
+                        <a href="#" class="dropdown-item">Our Team</a>
+                        <a href="#" class="dropdown-item">Careers</a>
+                        <a href="#" class="dropdown-item">News</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Welcome to MA Systems</h1>
+            <p>Innovative solutions for tomorrow's challenges</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+        
+        <!-- Floating particles -->
+        <div class="particle" style="left: 10%; top: 20%; width: 4px; height: 4px; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; top: 80%; width: 6px; height: 6px; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 80%; top: 30%; width: 3px; height: 3px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 90%; top: 70%; width: 5px; height: 5px; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 30%; top: 40%; width: 4px; height: 4px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 70%; top: 60%; width: 3px; height: 3px; animation-delay: 5s;"></div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.mobile-toggle');
+            navMenu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        // Smooth scrolling navbar effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255,255,255,0.98)';
+                navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255,255,255,0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Add click handlers for navigation
+        document.querySelectorAll('.nav-link, .dropdown-item, .cta-button').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Navigation clicked:', this.textContent);
+                // Add your navigation logic here
+            });
+        });
+
+        // Create additional floating particles dynamically
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 5 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = Math.random() * 4 + 4 + 's';
+            document.querySelector('.hero').appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, 10000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 3000);
+    </script>
+</body>
+</html>
